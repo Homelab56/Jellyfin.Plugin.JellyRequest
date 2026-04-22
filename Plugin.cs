@@ -11,6 +11,7 @@ using MediaBrowser.Model.Plugins;
 using MediaBrowser.Model.Serialization;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Jellyfin.Plugin.JellyRequest
 {
     /// <summary>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover - JellyRequest</title>
+    <link rel="stylesheet" href="assets/jellyrequest.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="app" class="jellyrequest-app">
+        <!-- Header -->
+        <header class="jellyrequest-header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-film"></i>
+                    <h1>Discover</h1>
+                </div>
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search movies and TV shows..." class="search-input">
+                    <button id="searchBtn" class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="user-menu">
+                    <button id="myRequestsBtn" class="btn btn-secondary">
+                        <i class="fas fa-list"></i> My Requests
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="jellyrequest-main">
+            <!-- Loading Overlay -->
+            <div id="loadingOverlay" class="loading-overlay hidden">
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading...</p>
+                </div>
+            </div>
+
+            <!-- Search Results -->
+            <section id="searchResults" class="search-results hidden">
+                <h2>Search Results</h2>
+                <div id="searchResultsGrid" class="content-grid"></div>
+            </section>
+
+            <!-- Trending Movies -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Trending Movies</h2>
+                    <button class="scroll-btn scroll-left" data-target="trendingMovies">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="scroll-btn scroll-right" data-target="trendingMovies">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div id="trendingMovies" class="carousel-container">
+                    <div class="carousel-track"></div>
+                </div>
+            </section>
+
+            <!-- Trending TV Shows -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Trending TV Shows</h2>
+                    <button class="scroll-btn scroll-left" data-target="trendingTv">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="scroll-btn scroll-right" data-target="trendingTv">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div id="trendingTv" class="carousel-container">
+                    <div class="carousel-track"></div>
+                </div>
+            </section>
+
+            <!-- Popular Movies -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Popular Movies</h2>
+                    <button class="scroll-btn scroll-left" data-target="popularMovies">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="scroll-btn scroll-right" data-target="popularMovies">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div id="popularMovies" class="carousel-container">
+                    <div class="carousel-track"></div>
+                </div>
+            </section>
+
+            <!-- Popular TV Shows -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Popular TV Shows</h2>
+                    <button class="scroll-btn scroll-left" data-target="popularTv">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="scroll-btn scroll-right" data-target="popularTv">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div id="popularTv" class="carousel-container">
+                    <div class="carousel-track"></div>
+                </div>
+            </section>
+
+            <!-- Top Rated Movies -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Top Rated Movies</h2>
+                    <button class="scroll-btn scroll-left" data-target="topRatedMovies">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="scroll-btn scroll-right" data-target="topRatedMovies">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div id="topRatedMovies" class="carousel-container">
+                    <div class="carousel-track"></div>
+                </div>
+            </section>
+
+            <!-- Top Rated TV Shows -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Top Rated TV Shows</h2>
+                    <button class="scroll-btn scroll-left" data-target="topRatedTv">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="scroll-btn scroll-right" data-target="topRatedTv">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div id="topRatedTv" class="carousel-container">
+                    <div class="carousel-track"></div>
+                </div>
+            </section>
+
+            <!-- New in Cinemas -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>New in Cinemas</h2>
+                    <button class="scroll-btn scroll-left" data-target="nowPlaying">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="scroll-btn scroll-right" data-target="nowPlaying">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div id="nowPlaying" class="carousel-container">
+                    <div class="carousel-track"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Detail Modal -->
+        <div id="detailModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button id="closeModal" class="close-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="detail-backdrop"></div>
+                    <div class="detail-content">
+                        <div class="detail-poster">
+                            <img id="detailPoster" src="" alt="">
+                        </div>
+                        <div class="detail-info">
+                            <h2 id="detailTitle"></h2>
+                            <div class="detail-meta">
+                                <span id="detailYear"></span>
+                                <span id="detailRating"></span>
+                                <span id="detailRuntime"></span>
+                            </div>
+                            <div class="detail-genres" id="detailGenres"></div>
+                            <p id="detailOverview" class="detail-overview"></p>
+                            <div class="detail-cast">
+                                <h3>Cast</h3>
+                                <p id="detailCast"></p>
+                            </div>
+                            <div class="detail-director">
+                                <h3>Director</h3>
+                                <p id="detailDirector"></p>
+                            </div>
+                            <div class="detail-actions">
+                                <button id="playBtn" class="btn btn-primary hidden">
+                                    <i class="fas fa-play"></i> Play Now
+                                </button>
+                                <button id="requestBtn" class="btn btn-primary">
+                                    <i class="fas fa-plus"></i> Request
+                                </button>
+                                <button id="trailerBtn" class="btn btn-secondary hidden">
+                                    <i class="fas fa-play-circle"></i> Watch Trailer
+                                </button>
+                            </div>
+                            <div class="request-status" id="requestStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toastContainer" class="toast-container"></div>
+    </div>
+
+    <script src="assets/jellyrequest.js"></script>
+</body>
+</html>
