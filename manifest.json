@@ -1,0 +1,177 @@
+{
+  "name": "JellyRequest",
+  "guid": "c8b5e8a2-4d7c-4e9f-8a1b-2c3d4e5f6a7b",
+  "version": "1.0.0.0",
+  "targetAbi": "10.9.0.0",
+  "sourceUrl": "https://github.com/your-repo/JellyRequest",
+  "description": "Netflix-style content discovery and request system for Jellyfin with Radarr/Sonarr integration.",
+  "overview": "Transform your Jellyfin server into a modern streaming platform where users can discover, browse, and request movies and TV shows with one click. Features a Netflix-inspired interface with horizontal carousels, smart search, and seamless integration with Radarr and Sonarr for automatic content acquisition.",
+  "owner": "JellyRequest Team",
+  "category": "User Interface",
+  "tags": [
+    "discovery",
+    "requests",
+    "radarr",
+    "sonarr",
+    "tmdb",
+    "netflix",
+    "ui",
+    "movies",
+    "tv",
+    "automation"
+  ],
+  "imageUrl": "https://raw.githubusercontent.com/your-repo/JellyRequest/main/images/logo.png",
+  "changelog": [
+    {
+      "version": "1.0.0.0",
+      "date": "2024-04-21",
+      "description": "Initial release",
+      "changes": [
+        "Netflix-style discovery interface with horizontal carousels",
+        "Full TMDB integration for movie and TV show metadata",
+        "Seamless Radarr integration for movie requests",
+        "Seamless Sonarr integration for TV show requests",
+        "Real-time request status tracking",
+        "User request management interface",
+        "Admin configuration panel",
+        "SQLite database for request persistence",
+        "Responsive design for desktop and tablet",
+        "Dark theme matching Jellyfin aesthetics"
+      ]
+    }
+  ],
+  "status": "active",
+  "assemblies": [
+    "JellyRequest.dll"
+  ],
+  "dependencies": [
+    {
+      "id": "Jellyfin.Server",
+      "version": "10.9.0.0"
+    }
+  ],
+  "compatibility": {
+    "jellyfin": {
+      "minimum": "10.9.0.0",
+      "maximum": "10.9.*"
+    },
+    "dotnet": {
+      "minimum": "8.0.0",
+      "maximum": "8.0.*"
+    },
+    "os": [
+      "windows",
+      "linux",
+      "macos"
+    ]
+  },
+  "releases": [
+    {
+      "version": "1.0.0.0",
+      "date": "2024-04-21",
+      "changelog": "Initial release with Netflix-style discovery and request system",
+      "checksum": "sha256:PLACEHOLDER_SHA256_CHECKSUM",
+      "targetAbi": "10.9.0.0",
+      "sourceUrl": "https://github.com/your-repo/JellyRequest/releases/download/v1.0.0.0/JellyRequest_1.0.0.0.zip",
+      "timestamp": "2024-04-21T23:00:00Z",
+      "channels": [
+        "stable"
+      ]
+    }
+  ],
+  "configuration": {
+    "configPage": {
+      "pluginName": "JellyRequest",
+      "pluginGuid": "c8b5e8a2-4d7c-4e9f-8a1b-2c3d4e5f6a7b",
+      "embedInDashboard": true,
+      "displayName": "JellyRequest",
+      "summary": "Configure TMDB, Radarr, and Sonarr settings for content requests"
+    },
+    "settings": [
+      {
+        "name": "TmdbApiKey",
+        "type": "string",
+        "label": "TMDB API Key",
+        "help": "Get your API key from https://www.themoviedb.org/settings/api",
+        "required": true,
+        "secret": true
+      },
+      {
+        "name": "RadarrUrl",
+        "type": "string",
+        "label": "Radarr URL",
+        "help": "Full URL to your Radarr instance (e.g., http://localhost:7878)",
+        "required": false
+      },
+      {
+        "name": "RadarrApiKey",
+        "type": "string",
+        "label": "Radarr API Key",
+        "help": "API key from Radarr Settings > General > Security",
+        "required": false,
+        "secret": true
+      },
+      {
+        "name": "SonarrUrl",
+        "type": "string",
+        "label": "Sonarr URL",
+        "help": "Full URL to your Sonarr instance (e.g., http://localhost:8989)",
+        "required": false
+      },
+      {
+        "name": "SonarrApiKey",
+        "type": "string",
+        "label": "Sonarr API Key",
+        "help": "API key from Sonarr Settings > General > Security",
+        "required": false,
+        "secret": true
+      },
+      {
+        "name": "AllowRegularUserRequests",
+        "type": "boolean",
+        "label": "Allow Regular Users to Make Requests",
+        "help": "If unchecked, only administrators can make requests",
+        "defaultValue": true
+      },
+      {
+        "name": "MaxRequestsPerUser",
+        "type": "integer",
+        "label": "Max Requests Per User",
+        "help": "Maximum number of active requests per user",
+        "defaultValue": 10,
+        "minimum": 1,
+        "maximum": 100
+      },
+      {
+        "name": "PollingIntervalMinutes",
+        "type": "integer",
+        "label": "Status Polling Interval (minutes)",
+        "help": "How often to check Radarr/Sonarr for request status updates",
+        "defaultValue": 5,
+        "minimum": 1,
+        "maximum": 60
+      }
+    ]
+  },
+  "permissions": [
+    "network",
+    "filesystem",
+    "configuration"
+  ],
+  "license": "GPL-3.0",
+  "licenseUrl": "https://github.com/your-repo/JellyRequest/blob/main/LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-repo/JellyRequest.git"
+  },
+  "issues": {
+    "url": "https://github.com/your-repo/JellyRequest/issues"
+  },
+  "documentation": {
+    "url": "https://github.com/your-repo/JellyRequest/wiki"
+  },
+  "community": {
+    "discord": "https://discord.gg/jellyfin",
+    "reddit": "https://reddit.com/r/jellyfin"
+  }
+}

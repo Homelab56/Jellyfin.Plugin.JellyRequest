@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Requests - JellyRequest</title>
+    <link rel="stylesheet" href="assets/jellyrequest.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="app" class="jellyrequest-app">
+        <!-- Header -->
+        <header class="jellyrequest-header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-list"></i>
+                    <h1>My Requests</h1>
+                </div>
+                <div class="header-actions">
+                    <button id="backToDiscover" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Discover
+                    </button>
+                    <button id="refreshBtn" class="btn btn-secondary">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="jellyrequest-main">
+            <!-- Loading Overlay -->
+            <div id="loadingOverlay" class="loading-overlay hidden">
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading your requests...</p>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state hidden">
+                <div class="empty-icon">
+                    <i class="fas fa-film"></i>
+                </div>
+                <h2>No Requests Yet</h2>
+                <p>You haven't requested any movies or TV shows yet. Start exploring and request your favorites!</p>
+                <button id="startExploring" class="btn btn-primary">
+                    <i class="fas fa-compass"></i> Start Exploring
+                </button>
+            </div>
+
+            <!-- Requests List -->
+            <section id="requestsSection" class="requests-section">
+                <div class="section-header">
+                    <h2>Your Requests</h2>
+                    <div class="filter-controls">
+                        <select id="statusFilter" class="filter-select">
+                            <option value="">All Status</option>
+                            <option value="NotRequested">Not Available</option>
+                            <option value="Requested">Requested</option>
+                            <option value="Downloading">Downloading</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Available">Available</option>
+                        </select>
+                        <select id="typeFilter" class="filter-select">
+                            <option value="">All Types</option>
+                            <option value="movie">Movies</option>
+                            <option value="tv">TV Shows</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="requestsList" class="requests-list">
+                    <!-- Request items will be dynamically added here -->
+                </div>
+
+                <!-- Admin View (hidden by default) -->
+                <div id="adminView" class="admin-view hidden">
+                    <div class="section-header">
+                        <h2>All Users' Requests</h2>
+                    </div>
+                    <table id="adminRequestsTable" class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Title</th>
+                                <th>Type</th>
+                                <th>Year</th>
+                                <th>Status</th>
+                                <th>Requested</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Admin request rows will be dynamically added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Request Detail Modal -->
+            <div id="requestDetailModal" class="modal hidden">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Request Details</h3>
+                        <button id="closeRequestModal" class="close-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="request-detail-content">
+                            <div class="request-poster">
+                                <img id="requestDetailPoster" src="" alt="">
+                            </div>
+                            <div class="request-detail-info">
+                                <h3 id="requestDetailTitle"></h3>
+                                <div class="request-detail-meta">
+                                    <span id="requestDetailYear"></span>
+                                    <span id="requestDetailType"></span>
+                                </div>
+                                <div class="request-status-detail">
+                                    <label>Status:</label>
+                                    <span id="requestDetailStatus" class="status-badge"></span>
+                                </div>
+                                <div class="request-date">
+                                    <label>Requested:</label>
+                                    <span id="requestDetailDate"></span>
+                                </div>
+                                <div class="request-progress" id="requestProgressContainer">
+                                    <label>Progress:</label>
+                                    <div class="progress-bar">
+                                        <div id="requestProgressBar" class="progress-fill"></div>
+                                    </div>
+                                    <span id="requestProgressText"></span>
+                                </div>
+                                <div class="request-actions">
+                                    <button id="playRequestBtn" class="btn btn-primary hidden">
+                                        <i class="fas fa-play"></i> Play Now
+                                    </button>
+                                    <button id="cancelRequestBtn" class="btn btn-danger">
+                                        <i class="fas fa-times"></i> Cancel Request
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Toast Notifications -->
+        <div id="toastContainer" class="toast-container"></div>
+    </div>
+
+    <script src="assets/jellyrequest-requests.js"></script>
+</body>
+</html>
