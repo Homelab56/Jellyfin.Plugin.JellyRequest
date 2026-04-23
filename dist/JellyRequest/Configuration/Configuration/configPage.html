@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JellyRequest Configuration</title>
+    <link rel="stylesheet" href="../web/assets/jellyrequest.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="config-page">
+        <div class="config-container">
+            <header class="config-header">
+                <div class="config-logo">
+                    <i class="fas fa-film"></i>
+                    <h1>JellyRequest Configuration</h1>
+                </div>
+                <p class="config-description">Configure your TMDB, Radarr, and Sonarr settings for content requests.</p>
+            </header>
+
+            <main class="config-main">
+                <form id="configForm" class="config-form">
+                    <!-- TMDB Configuration -->
+                    <section class="config-section">
+                        <h2><i class="fas fa-database"></i> TMDB Configuration</h2>
+                        <div class="form-group">
+                            <label for="tmdbApiKey">TMDB API Key *</label>
+                            <input type="text" id="tmdbApiKey" name="tmdbApiKey" class="form-control" required>
+                            <small class="form-help">Get your API key from <a href="https://www.themoviedb.org/settings/api" target="_blank">TMDB</a></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="tmdbLanguage">Default Language</label>
+                            <select id="tmdbLanguage" name="tmdbLanguage" class="form-control">
+                                <option value="en-US">English (US)</option>
+                                <option value="en-GB">English (UK)</option>
+                                <option value="es-ES">Spanish</option>
+                                <option value="fr-FR">French</option>
+                                <option value="de-DE">German</option>
+                                <option value="it-IT">Italian</option>
+                                <option value="pt-BR">Portuguese (Brazil)</option>
+                                <option value="ja-JP">Japanese</option>
+                                <option value="ko-KR">Korean</option>
+                                <option value="zh-CN">Chinese (Simplified)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeAdultContent" name="includeAdultContent">
+                                <span class="checkmark"></span>
+                                Include Adult Content
+                            </label>
+                        </div>
+                    </section>
+
+                    <!-- Radarr Configuration -->
+                    <section class="config-section">
+                        <h2><i class="fas fa-film"></i> Radarr Configuration (Movies)</h2>
+                        <div class="form-group">
+                            <label for="radarrUrl">Radarr URL *</label>
+                            <input type="url" id="radarrUrl" name="radarrUrl" class="form-control" placeholder="http://localhost:7878">
+                            <small class="form-help">The full URL to your Radarr instance</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="radarrApiKey">Radarr API Key *</label>
+                            <input type="text" id="radarrApiKey" name="radarrApiKey" class="form-control">
+                            <small class="form-help">Find this in Radarr Settings > General > Security</small>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="radarrQualityProfileId">Quality Profile ID</label>
+                                <input type="number" id="radarrQualityProfileId" name="radarrQualityProfileId" class="form-control" min="1" value="1">
+                                <small class="form-help">Default quality profile for new movie requests</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="radarrRootFolderId">Root Folder ID</label>
+                                <input type="number" id="radarrRootFolderId" name="radarrRootFolderId" class="form-control" min="1" value="1">
+                                <small class="form-help">Default root folder for new movie requests</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" id="testRadarrConnection" class="btn btn-secondary">
+                                <i class="fas fa-plug"></i> Test Connection
+                            </button>
+                            <span id="radarrConnectionStatus" class="connection-status"></span>
+                        </div>
+                    </section>
+
+                    <!-- Sonarr Configuration -->
+                    <section class="config-section">
+                        <h2><i class="fas fa-tv"></i> Sonarr Configuration (TV Shows)</h2>
+                        <div class="form-group">
+                            <label for="sonarrUrl">Sonarr URL *</label>
+                            <input type="url" id="sonarrUrl" name="sonarrUrl" class="form-control" placeholder="http://localhost:8989">
+                            <small class="form-help">The full URL to your Sonarr instance</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="sonarrApiKey">Sonarr API Key *</label>
+                            <input type="text" id="sonarrApiKey" name="sonarrApiKey" class="form-control">
+                            <small class="form-help">Find this in Sonarr Settings > General > Security</small>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="sonarrQualityProfileId">Quality Profile ID</label>
+                                <input type="number" id="sonarrQualityProfileId" name="sonarrQualityProfileId" class="form-control" min="1" value="1">
+                                <small class="form-help">Default quality profile for new TV show requests</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="sonarrRootFolderId">Root Folder ID</label>
+                                <input type="number" id="sonarrRootFolderId" name="sonarrRootFolderId" class="form-control" min="1" value="1">
+                                <small class="form-help">Default root folder for new TV show requests</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" id="testSonarrConnection" class="btn btn-secondary">
+                                <i class="fas fa-plug"></i> Test Connection
+                            </button>
+                            <span id="sonarrConnectionStatus" class="connection-status"></span>
+                        </div>
+                    </section>
+
+                    <!-- User Permissions -->
+                    <section class="config-section">
+                        <h2><i class="fas fa-users"></i> User Permissions</h2>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="allowRegularUserRequests" name="allowRegularUserRequests">
+                                <span class="checkmark"></span>
+                                Allow Regular Users to Make Requests
+                            </label>
+                            <small class="form-help">If unchecked, only administrators can make requests</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="maxRequestsPerUser">Max Requests Per User</label>
+                            <input type="number" id="maxRequestsPerUser" name="maxRequestsPerUser" class="form-control" min="1" max="100" value="10">
+                            <small class="form-help">Maximum number of active requests per user</small>
+                        </div>
+                    </section>
+
+                    <!-- Advanced Settings -->
+                    <section class="config-section">
+                        <h2><i class="fas fa-cog"></i> Advanced Settings</h2>
+                        <div class="form-group">
+                            <label for="pollingIntervalMinutes">Status Polling Interval (minutes)</label>
+                            <input type="number" id="pollingIntervalMinutes" name="pollingIntervalMinutes" class="form-control" min="1" max="60" value="5">
+                            <small class="form-help">How often to check Radarr/Sonarr for request status updates</small>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="enableNotifications" name="enableNotifications" checked>
+                                <span class="checkmark"></span>
+                                Enable Notifications
+                            </label>
+                            <small class="form-help">Show notifications when requests are completed</small>
+                        </div>
+                    </section>
+
+                    <!-- Form Actions -->
+                    <div class="config-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Configuration
+                        </button>
+                        <button type="button" id="resetConfig" class="btn btn-secondary">
+                            <i class="fas fa-undo"></i> Reset to Defaults
+                        </button>
+                    </div>
+                </form>
+            </main>
+
+            <!-- Toast Notifications -->
+            <div id="toastContainer" class="toast-container"></div>
+        </div>
+    </div>
+
+    <script src="../web/assets/jellyrequest-config.js"></script>
+</body>
+</html>

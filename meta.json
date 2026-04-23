@@ -7,7 +7,7 @@
   "name": "JellyRequest",
   "overview": "Browse and request movies and TV shows directly in Jellyfin",
   "owner": "glenn",
-  "targetAbi": "10.11.8.0",
+  "targetAbi": "10.11.0.0",
   "timestamp": "2026-04-22T00:00:00Z",
   "version": "1.0.0.0"
 }

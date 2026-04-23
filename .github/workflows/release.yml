@@ -1,0 +1,79 @@
+name: Release Plugin
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '9.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build plugin
+      run: dotnet build -c Release --no-restore
+      
+    - name: Create release directory
+      run: mkdir -p release/JellyRequest
+      
+    - name: Copy plugin files
+      run: |
+        cp bin/Release/Jellyfin.Plugin.JellyRequest.dll release/JellyRequest/
+        cp bin/Release/Jellyfin.Plugin.JellyRequest.deps.json release/JellyRequest/
+        cp bin/Release/Jellyfin.Plugin.JellyRequest.pdb release/JellyRequest/
+        cp -r Web release/JellyRequest/
+        cp -r Configuration release/JellyRequest/
+        cp meta.json release/JellyRequest/
+        
+    - name: Create release zip
+      run: |
+        cd release
+        zip -r JellyRequest_${{ github.ref_name }}.zip JellyRequest/
+        
+    - name: Generate checksum
+      run: |
+        cd release
+        sha256sum JellyRequest_${{ github.ref_name }}.zip > JellyRequest_${{ github.ref_name }}.zip.sha256
+        
+    - name: Read checksum
+      id: checksum
+      run: |
+        cd release
+        echo "checksum=$(cat JellyRequest_${{ github.ref_name }}.zip.sha256 | cut -d' ' -f1)" >> $GITHUB_OUTPUT
+        
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        name: JellyRequest ${{ github.ref_name }}
+        body: |
+          ## JellyRequest ${{ github.ref_name }}
+          
+          ### Installation
+          1. Download `JellyRequest_${{ github.ref_name }}.zip`
+          2. Extract to your Jellyfin plugins directory
+          3. Restart Jellyfin
+          
+          ### Features
+          - Netflix-style discovery interface
+          - TMDB integration
+          - Radarr/Sonarr integration
+          - Request management
+          
+        files: |
+          release/JellyRequest_${{ github.ref_name }}.zip
+          release/JellyRequest_${{ github.ref_name }}.zip.sha256
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
