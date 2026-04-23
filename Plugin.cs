@@ -1,4 +1,3 @@
-cat <<EOF > Plugin.cs
 using System;
 using System.Collections.Generic;
 using Jellyfin.Plugin.JellyRequest.Configuration;
@@ -35,4 +34,3 @@ namespace Jellyfin.Plugin.JellyRequest
         }
     }
 }
-EOF
