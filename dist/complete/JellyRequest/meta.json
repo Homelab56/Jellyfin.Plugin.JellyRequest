@@ -1,0 +1,13 @@
+{
+  "category": "General",
+  "changelog": "Initial release",
+  "description": "Netflix-style content discovery and request system",
+  "guid": "c8b5e8a2-4d7c-4e9f-8a1b-2c3d4e5f6a7b",
+  "imageUrl": "",
+  "name": "JellyRequest",
+  "overview": "Browse and request movies and TV shows directly in Jellyfin",
+  "owner": "glenn",
+  "targetAbi": "10.11.0.0",
+  "timestamp": "2026-04-22T00:00:00Z",
+  "version": "1.0.0.0"
+}

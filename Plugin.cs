@@ -19,7 +19,7 @@ namespace Jellyfin.Plugin.JellyRequest
             Instance = this;
         }
 
-        public static Plugin Instance { get; private set; }
+        public static Plugin? Instance { get; private set; }
 
         public IEnumerable<PluginPageInfo> GetPages()
         {
@@ -27,8 +27,9 @@ namespace Jellyfin.Plugin.JellyRequest
             {
                 new PluginPageInfo
                 {
-                    Name = "JellyRequest",
-                    EmbeddedResourcePath = GetType().Namespace + ".Web.index.html"
+                    Name = this.Name,
+                    EmbeddedResourcePath = $"{GetType().Namespace}.Configuration.configPage.html",
+                    EnableInMainMenu = true
                 }
             };
         }
